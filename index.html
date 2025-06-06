@@ -40,7 +40,7 @@
 
     header {
       background-color: var(--header-color);
-      padding: 20px 40px;
+      padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -60,10 +60,24 @@
       margin-right: 10px;
     }
 
+    nav {
+      position: relative;
+    }
+
+    .nav-toggle {
+      display: none;
+      font-size: 1.5rem;
+      color: #fff;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
     nav ul {
       list-style: none;
       display: flex;
       gap: 20px;
+      align-items: center;
     }
 
     nav ul li a,
@@ -195,19 +209,24 @@
     }
 
     @media (max-width: 768px) {
-      .feature-icons {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      header {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-      }
-
       nav ul {
         flex-direction: column;
+        background-color: var(--header-color);
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        display: none;
+        padding: 15px 10px;
+        border-radius: 8px;
+      }
+
+      nav ul.show {
+        display: flex;
+      }
+
+      .nav-toggle {
+        display: block;
       }
     }
   </style>
@@ -218,13 +237,13 @@
       <img src="static/logo.png" alt="Tattoo Icon" width="32" height="32" />Double R Tattoos
     </h2>
     <nav>
-      <ul>
+      <button class="nav-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+      <ul id="nav-list">
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="services.html">Service</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li><a href="booking.html">Book Now</a></li>
-
         <li><button onclick="toggleMode()" class="toggle-mode">Toggle Mode</button></li>
       </ul>
     </nav>
@@ -278,6 +297,11 @@
   <script>
     function toggleMode() {
       document.body.classList.toggle("dark-mode");
+    }
+
+    function toggleMenu() {
+      const navList = document.getElementById("nav-list");
+      navList.classList.toggle("show");
     }
   </script>
 </body>
